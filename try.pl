@@ -20,11 +20,14 @@ add_action(Action, PreviousSituation, NewSituation) :-
     NewSituation = result(Action, PreviousSituation).
 
 can_pour(From, To, S) :-
-    % make sure they are the same color 
     bottle_layers(From, Top1, Bottom1, S),
     bottle_layers(To, Top2, Bottom2, S),
-    Bottom1 \= e,
     Top2 = e,
+    (  
+        (Top1 \= e , (  (Bottom2 =e)     ;    (Bottom2 \=e , Top1 = Bottom2)   )   )  
+         ;  
+        (Bottom1 \= e , (  (Bottom2 =e)     ;    (Bottom2 \=e , Bottom1 = Bottom2)   )   ) 
+    ),
     !.
 
 % add_action(pour(1,3), [[b,r],[b,r],[e,e]], S).
