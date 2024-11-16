@@ -4,24 +4,23 @@ ids(X,L):-
 (call_with_depth_limit(myPredicate(X),L,R), R=depth_limit_exceeded,
 L1 is L+1, ids(X,L1)).
 
-bottle_layers(1, Color1, Color2, S):-
+bottle_layers(N, Color1, Color2, S):-
     (
-        S = s0 -> bottle1(Color1, Color2)
+        S = s0 , 
+        (
+        (N =1 , bottle1(Color1, Color2));
+        (N =2 , bottle2(Color1, Color2));
+        (N =3 , bottle3(Color1, Color2))
+        )
+    )
+    ;
+    (
+        S = result(pour(From,To), POTATO) , 
+        bottle_layers(1, Top1, Bottom1, POTATO) , 
+        bottle_layers(2, Top2, Bottom2, POTATO) , 
+        bottle_layers(3, Top3, Bottom3, POTATO) 
     )
     .
-
-bottle_layers(2, Color1, Color2, S):-
-    (
-        S = s0 -> bottle2(Color1, Color2)
-    )
-    .
-
-bottle_layers(3, Color1, Color2, S):-
-    (
-        S = s0 -> bottle3(Color1, Color2)
-    )
-    .
-    
 
 add_action(Action, PreviousSituation, NewSituation) :-
     pour(A,B) = Action,
