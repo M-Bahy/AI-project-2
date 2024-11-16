@@ -5,13 +5,22 @@ ids(X,L):-
 L1 is L+1, ids(X,L1)).
 
 bottle_layers(1, Color1, Color2, S):-
-    bottle1(Color1, Color2).
+    (
+        S = s0 -> bottle1(Color1, Color2)
+    )
+    .
 
 bottle_layers(2, Color1, Color2, S):-
-    bottle2(Color1, Color2).
+    (
+        S = s0 -> bottle2(Color1, Color2)
+    )
+    .
 
 bottle_layers(3, Color1, Color2, S):-
-    bottle3(Color1, Color2).
+    (
+        S = s0 -> bottle3(Color1, Color2)
+    )
+    .
     
 
 add_action(Action, PreviousSituation, NewSituation) :-
