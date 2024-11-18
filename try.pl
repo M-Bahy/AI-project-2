@@ -5,12 +5,10 @@ ids(X,L):-
 L1 is L+1, ids(X,L1)).
 
 
-
 current_bottle_colors(Top1,Bottom1,Top2,Bottom2,Top3,Bottom3,s0):-
     bottle1(Top1,Bottom1),
     bottle2(Top2,Bottom2),
     bottle3(Top3,Bottom3).
-
 
 current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, result(Action, S)) :-
     (
@@ -39,16 +37,9 @@ current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, result(Action
             (B = 3 -> ToTop = Top3Prev, ToBottom = Bottom3Prev)
         )
 	    ),
-        write('FromTop: '), write(FromTop), nl,
-        write('FromBottom: '), write(FromBottom), nl,
-        write('ToTop: '), write(ToTop), nl,
-        write('ToBottom: '), write(ToBottom), nl,
 	    can_pour(FromTop, FromBottom, ToTop, ToBottom, S),
         update_bottle_colors(A, B, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3))
     ).
-
-
-
 
 
 
@@ -65,7 +56,6 @@ update_bottle_colors(1, 2, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     (Bottom1Prev = e -> Top1 = e, Bottom1 = e, Top3 = Top3Prev, Bottom3 = Bottom3Prev).
 
 
-
 update_bottle_colors(1, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
 
     (Top1Prev \= e -> Top1 = e, Bottom1 = Bottom1Prev, Top2= Top2Prev, Bottom2=Bottom2Prev,
@@ -77,8 +67,6 @@ update_bottle_colors(1, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     ((Bottom3Prev \= e -> Top3 = Bottom1Prev, Bottom3 = Bottom3Prev);
     (Bottom3Prev = e -> Top3 =e, Bottom3 = Bottom1Prev)));
     (Bottom1Prev = e -> Top1 = e, Bottom1 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev).
-
-
 
 update_bottle_colors(2, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
 
@@ -95,8 +83,6 @@ update_bottle_colors(2, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
 update_bottle_colors(3, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
 
-    
-
     (Top3Prev \= e -> Top3 = e, Bottom3 = Bottom3Prev, Top2= Top2Prev, Bottom2=Bottom2Prev,
     ((Bottom1Prev \= e -> Top1 = Top3Prev, Bottom1 = Bottom1Prev);
     (Bottom1Prev = e -> Top1 =e, Bottom1 = Top3Prev)));
@@ -106,10 +92,6 @@ update_bottle_colors(3, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     ((Bottom1Prev \= e -> Top1 = Bottom3Prev, Bottom1 = Bottom1Prev);
     (Bottom1Prev = e -> Top1 =e, Bottom1 = Bottom3Prev)));
     (Bottom3Prev = e -> Top3 = e, Bottom3 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev).
-
-
-
-
 
 update_bottle_colors(3, 2, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
 
@@ -122,7 +104,6 @@ update_bottle_colors(3, 2, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     ((Bottom2Prev \= e -> Top2 = Bottom3Prev, Bottom2 = Bottom2Prev);
     (Bottom2Prev = e -> Top2 =e, Bottom2 = Bottom3Prev)));
     (Bottom3Prev = e -> Top3 = e, Bottom3 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev).
-
 
 update_bottle_colors(2, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
 
@@ -137,8 +118,6 @@ update_bottle_colors(2, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     (Bottom2Prev = e -> Top2 = e, Bottom2 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev).
 
 
-
-
 can_pour(Top1,Bottom1,Top2,Bottom2, S) :-
 
      Top2 = e,
@@ -149,27 +128,9 @@ can_pour(Top1,Bottom1,Top2,Bottom2, S) :-
     ),
     !.
 
-can_pour4(Top1, Bottom1, Top2, Bottom2, S) :-
-    Top2 = e,
-    (
-        (   Top1 \= e,
-            (   (Bottom2 == e, write('Condition 1: Top1 is not empty and Bottom2 is empty'), nl)
-            ;   (Bottom2 \= e, Top1 == Bottom2, write('Condition 2: Top1 is not empty, Bottom2 is not empty, and Top1 matches Bottom2'), nl)
-            )
-        )
-    ;
-        (   Top1 ==e,Bottom1 \= e,
-            (   (Bottom2 == e, write('Condition 3: Bottom1 is not empty and Bottom2 is empty'), nl)
-            ;   (Bottom2 \= e, Bottom1 == Bottom2, write('Condition 4: Bottom1 is not empty, Bottom2 is not empty, and Bottom1 matches Bottom2'), nl)
-            )
-        )
-    ),
-    !.
 
 
 
 
 
-% add_action(pour(1,3), [[b,r],[b,r],[e,e]], S).
 
-% S = result(pour(1,3), S0).
