@@ -129,6 +129,18 @@ can_pour(Top1,Bottom1,Top2,Bottom2) :-
     !.
 
 
+goal(S) :-
+    current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, S),
+    isGoal(Top1,Bottom1),
+    isGoal(Top2,Bottom2),
+    isGoal(Top3,Bottom3).
+
+isGoal(Top,Bottom):-
+    (Top == e;
+    Bottom == e);
+    (Top == Bottom).
+
+
 
 
 
