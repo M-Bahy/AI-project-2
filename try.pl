@@ -15,12 +15,12 @@ current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, result(Action
         % Case where the action fails
         (current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, S),
         pour(A, B) = Action,
-        \+ can_pour(Top1, Bottom1,Top2,Bottom2, S),
-        \+ can_pour(Top2, Bottom2,Top1,Bottom1, S),
-        \+ can_pour(Top1, Bottom1,Top3,Bottom3, S),
-        \+ can_pour(Top3, Bottom3,Top1,Bottom1, S),
-        \+ can_pour(Top2, Bottom2,Top3,Bottom3, S),
-        \+ can_pour(Top3, Bottom3,Top2,Bottom2, S));    
+        \+ can_pour(Top1, Bottom1,Top2,Bottom2),
+        \+ can_pour(Top2, Bottom2,Top1,Bottom1),
+        \+ can_pour(Top1, Bottom1,Top3,Bottom3),
+        \+ can_pour(Top3, Bottom3,Top1,Bottom1),
+        \+ can_pour(Top2, Bottom2,Top3,Bottom3),
+        \+ can_pour(Top3, Bottom3,Top2,Bottom2));    
         % Case where the action succeeds
         (current_bottle_colors(Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, S),
         pour(A, B) = Action,
@@ -37,7 +37,7 @@ current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, result(Action
             (B = 3 -> ToTop = Top3Prev, ToBottom = Bottom3Prev)
         )
 	    ),
-	    can_pour(FromTop, FromBottom, ToTop, ToBottom, S),
+	    can_pour(FromTop, FromBottom, ToTop, ToBottom),
         update_bottle_colors(A, B, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3))
     ).
 
@@ -118,7 +118,7 @@ update_bottle_colors(2, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     (Bottom2Prev = e -> Top2 = e, Bottom2 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev).
 
 
-can_pour(Top1,Bottom1,Top2,Bottom2, S) :-
+can_pour(Top1,Bottom1,Top2,Bottom2) :-
 
      Top2 = e,
      (  
