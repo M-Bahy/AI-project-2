@@ -75,7 +75,7 @@ update_bottle_colors(1, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
     (Top1Prev = e -> Top1 = e, Bottom1 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev,
     
     ((Bottom3Prev \= e -> Top3 = Top1Prev, Bottom3 = Bottom3Prev);
-    (Bottom3Prev = e -> Top3 =e, Bottom3 = Top1Prev)));
+    (Bottom3Prev = e -> Top3 =e, Bottom3 = Top3Prev)));
     (Bottom1Prev = e -> Top1 = e, Bottom1 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev).
 
 
@@ -88,12 +88,14 @@ update_bottle_colors(2, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top2Prev = e -> Top2 = e, Bottom2 = e, Top3 = Top3Prev, Bottom3 = Bottom3Prev,
     
-    ((Bottom1Prev \= e -> Top1 = Top2Prev, Bottom1 = Bottom1Prev);
-    (Bottom1Prev = e -> Top1 =e, Bottom1 = Top2Prev)));
+    ((Bottom1Prev \= e -> Top1 = Bottom2Prev, Bottom1 = Bottom1Prev);
+    (Bottom1Prev = e -> Top1 =e, Bottom1 = Bottom2Prev)));
     (Bottom2Prev = e -> Top2 = e, Bottom2 = e, Top3 = Top3Prev, Bottom3 = Bottom3Prev).
 
 
 update_bottle_colors(3, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Prev, Bottom3Prev, Top1, Bottom1, Top2, Bottom2, Top3, Bottom3) :-
+
+    
 
     (Top3Prev \= e -> Top3 = e, Bottom3 = Bottom3Prev, Top2= Top2Prev, Bottom2=Bottom2Prev,
     ((Bottom1Prev \= e -> Top1 = Top3Prev, Bottom1 = Bottom1Prev);
@@ -101,8 +103,8 @@ update_bottle_colors(3, 1, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top3Prev = e -> Top3 = e, Bottom3 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev,
     
-    ((Bottom1Prev \= e -> Top1 = Top3Prev, Bottom1 = Bottom1Prev);
-    (Bottom1Prev = e -> Top1 =e, Bottom1 = Top1Prev)));
+    ((Bottom1Prev \= e -> Top1 = Bottom3Prev, Bottom1 = Bottom1Prev);
+    (Bottom1Prev = e -> Top1 =e, Bottom1 = Bottom3Prev)));
     (Bottom3Prev = e -> Top3 = e, Bottom3 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev).
 
 
@@ -137,13 +139,30 @@ update_bottle_colors(2, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
 
 
-
 can_pour(Top1,Bottom1,Top2,Bottom2, S) :-
+
+     Top2 = e,
+     (  
+         (Top1 \= e , (  (Bottom2 == e)     ;    (Bottom2 \=e , Top1 == Bottom2)   )   )  
+       ;  
+        (Top1 ==e,Bottom1 \= e , (  (Bottom2 == e)     ;    (Bottom2 \=e , Bottom1 == Bottom2)   )   ) 
+    ),
+    !.
+
+can_pour4(Top1, Bottom1, Top2, Bottom2, S) :-
     Top2 = e,
-    (  
-        (Top1 \= e , (  (Bottom2 == e)     ;    (Bottom2 \=e , Top1 == Bottom2)   )   )  
-         ;  
-        (Bottom1 \= e , (  (Bottom2 == e)     ;    (Bottom2 \=e , Bottom1 == Bottom2)   )   ) 
+    (
+        (   Top1 \= e,
+            (   (Bottom2 == e, write('Condition 1: Top1 is not empty and Bottom2 is empty'), nl)
+            ;   (Bottom2 \= e, Top1 == Bottom2, write('Condition 2: Top1 is not empty, Bottom2 is not empty, and Top1 matches Bottom2'), nl)
+            )
+        )
+    ;
+        (   Top1 ==e,Bottom1 \= e,
+            (   (Bottom2 == e, write('Condition 3: Bottom1 is not empty and Bottom2 is empty'), nl)
+            ;   (Bottom2 \= e, Bottom1 == Bottom2, write('Condition 4: Bottom1 is not empty, Bottom2 is not empty, and Bottom1 matches Bottom2'), nl)
+            )
+        )
     ),
     !.
 
