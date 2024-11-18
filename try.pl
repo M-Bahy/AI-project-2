@@ -60,8 +60,8 @@ update_bottle_colors(1, 2, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top1Prev = e -> Top1 = e, Bottom1 = e, Top3 = Top3Prev, Bottom3 = Bottom3Prev,
     
-    ((Bottom2Prev \= e -> Top2 = Top1Prev, Bottom2 = Bottom2Prev);
-    (Bottom2Prev = e -> Top2 =e, Bottom2 = Top1Prev)));
+    ((Bottom2Prev \= e -> Top2 = Bottom1Prev, Bottom2 = Bottom2Prev);
+    (Bottom2Prev = e -> Top2 =e, Bottom2 = Bottom1Prev)));
     (Bottom1Prev = e -> Top1 = e, Bottom1 = e, Top3 = Top3Prev, Bottom3 = Bottom3Prev).
 
 
@@ -74,8 +74,8 @@ update_bottle_colors(1, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top1Prev = e -> Top1 = e, Bottom1 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev,
     
-    ((Bottom3Prev \= e -> Top3 = Top1Prev, Bottom3 = Bottom3Prev);
-    (Bottom3Prev = e -> Top3 =e, Bottom3 = Top3Prev)));
+    ((Bottom3Prev \= e -> Top3 = Bottom1Prev, Bottom3 = Bottom3Prev);
+    (Bottom3Prev = e -> Top3 =e, Bottom3 = Bottom1Prev)));
     (Bottom1Prev = e -> Top1 = e, Bottom1 = e, Top2 = Top2Prev, Bottom2 = Bottom2Prev).
 
 
@@ -119,8 +119,8 @@ update_bottle_colors(3, 2, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top3Prev = e -> Top3 = e, Bottom3 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev,
     
-    ((Bottom2Prev \= e -> Top2 = Top3Prev, Bottom2 = Bottom2Prev);
-    (Bottom2Prev = e -> Top2 =e, Bottom2 = Top3Prev)));
+    ((Bottom2Prev \= e -> Top2 = Bottom3Prev, Bottom2 = Bottom2Prev);
+    (Bottom2Prev = e -> Top2 =e, Bottom2 = Bottom3Prev)));
     (Bottom3Prev = e -> Top3 = e, Bottom3 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev).
 
 
@@ -132,8 +132,8 @@ update_bottle_colors(2, 3, Top1Prev, Bottom1Prev, Top2Prev, Bottom2Prev, Top3Pre
 
     (Top2Prev = e -> Top2 = e, Bottom2 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev,
     
-    ((Bottom3Prev \= e -> Top3 = Top2Prev, Bottom3 = Bottom3Prev);
-    (Bottom3Prev = e -> Top3 =e, Bottom3 = Top2Prev)));
+    ((Bottom3Prev \= e -> Top3 = Bottom2Prev, Bottom3 = Bottom3Prev);
+    (Bottom3Prev = e -> Top3 =e, Bottom3 = Bottom2Prev)));
     (Bottom2Prev = e -> Top2 = e, Bottom2 = e, Top1 = Top1Prev, Bottom1 = Bottom1Prev).
 
 
