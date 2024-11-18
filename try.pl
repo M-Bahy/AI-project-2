@@ -1,14 +1,15 @@
 :- include('KB.pl').
-ids(X,L):-
-(call_with_depth_limit(myPredicate(X),L,R), number(R));
-(call_with_depth_limit(myPredicate(X),L,R), R=depth_limit_exceeded,
-L1 is L+1, ids(X,L1)).
+ids(S,L):-
+(call_with_depth_limit(goal(S),L,R), number(R));
+(call_with_depth_limit(goal(S),L,R), R=depth_limit_exceeded,
+L1 is L+1, ids(S,L1)).
 
 
 current_bottle_colors(Top1,Bottom1,Top2,Bottom2,Top3,Bottom3,s0):-
     bottle1(Top1,Bottom1),
     bottle2(Top2,Bottom2),
-    bottle3(Top3,Bottom3).
+    bottle3(Top3,Bottom3),!.
+
 
 current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, result(Action, S)) :-
     (
@@ -136,9 +137,11 @@ goal(S) :-
     isGoal(Top3,Bottom3).
 
 isGoal(Top,Bottom):-
+    write('ISGOALLL'),nl,
     (Top == e;
     Bottom == e);
     (Top == Bottom).
+
 
 
 
