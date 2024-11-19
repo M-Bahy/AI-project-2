@@ -141,31 +141,32 @@ isGoal(Top,Bottom):-
     write('ISGOALLL'),nl,
     (Top == Bottom).
 
-generate(S) :-
+generate(S,X) :-
     write('Generating the solution...'), nl,
     (
-        B = result(pour(1, 2), S),
-        goal(B)
+        X = result(pour(1, 2), S),
+        write('Generated solution: '), write(X), nl,
+        goal(X)
     );
     (
-        S = result(pour(1, 3), s0),
-        goal(S)
+        X = result(pour(1, 3), S),
+        goal(X)
     );
     (
-        S = result(pour(2, 1), s0),
-        goal(S)
+        X = result(pour(2, 1), S),
+        goal(X)
     );
     (
-        S = result(pour(2, 3), s0),
-        goal(S)
+        X = result(pour(2, 3), S),
+        goal(X)
     );
     (
-        S = result(pour(3, 1), s0),
-        goal(S)
+        X = result(pour(3, 1), S),
+        goal(X)
     );
     (
-        S = result(pour(3, 2), s0),
-        goal(S)
+        X = result(pour(3, 2), S),
+        goal(X)
     ).
 
 goal(S) :-
@@ -176,7 +177,8 @@ goal(S) :-
     ;
     (
         var(S),
-        generate(s0)
+        generate(s0,X),
+        S=X
     ).
 
 
