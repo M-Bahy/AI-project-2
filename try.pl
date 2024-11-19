@@ -135,6 +135,7 @@ goal(S) :-
     isGoal(Top1,Bottom1),
     isGoal(Top2,Bottom2),
     isGoal(Top3,Bottom3),!.
+    % remove the cut to get all possible solutions
 
 isGoal(Top,Bottom):-
     write('ISGOALLL'),nl,
