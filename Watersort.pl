@@ -1,7 +1,7 @@
 :- include('KB.pl').
 ids(S,L):-
-(call_with_depth_limit(goal(S),L,R), number(R));
-(call_with_depth_limit(goal(S),L,R), R=depth_limit_exceeded,
+(call_with_depth_limit(solution(S),L,R), number(R));
+(call_with_depth_limit(solution(S),L,R), R=depth_limit_exceeded,
 L1 is L+1, ids(S,L1)).
 
 
@@ -138,41 +138,40 @@ validate(S) :-
     % remove the cut to get all possible solutions
 
 isGoal(Top,Bottom):-
-    write('ISGOALLL'),nl,
     (Top == Bottom).
 
 generate(S,X):-
     write('Generating the solution...'), nl,
     (
         A = result(pour(1, 2), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
     );
     (
         A = result(pour(1, 3), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
 
     );
     (
         A = result(pour(2, 1), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
 
     );
     (
         A = result(pour(2, 3), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
 
     );
     (
         A = result(pour(3, 1), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
     );
     (
         A = result(pour(3, 2), S),
-        (goal(A) -> (X = A); (generate(A, X)))
+        (solution(A) -> (X = A); (generate(A, X)))
     ).
  
 
-goal(S) :-
+solution(S) :-
     (
         \+ var(S),
         validate(S)
@@ -184,4 +183,5 @@ goal(S) :-
         S=X
     ).
 
-
+goal(S):-
+    ids(S,1).
