@@ -138,8 +138,6 @@ goal(S) :-
 
 isGoal(Top,Bottom):-
     write('ISGOALLL'),nl,
-    (Top == e;
-    Bottom == e);
     (Top == Bottom).
 
 
