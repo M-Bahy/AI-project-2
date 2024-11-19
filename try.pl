@@ -130,7 +130,7 @@ can_pour(Top1,Bottom1,Top2,Bottom2) :-
     !.
 
 
-goal(S) :-
+validate(S) :-
     current_bottle_colors(Top1, Bottom1, Top2, Bottom2, Top3, Bottom3, S),
     isGoal(Top1,Bottom1),
     isGoal(Top2,Bottom2),
@@ -144,7 +144,15 @@ isGoal(Top,Bottom):-
 
 
 
-
-
+goal(S) :-
+    (
+        \+ var(S),
+        validate(S)
+    )
+    ;
+    (
+        var(S),
+        write('Finding the solution...'), nl
+    ).
 
 
